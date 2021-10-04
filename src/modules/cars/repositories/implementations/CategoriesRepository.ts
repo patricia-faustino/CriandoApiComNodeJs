@@ -1,10 +1,9 @@
-import { Category } from '../model/Category';
+import { Category } from '../../model/Category';
 import {
   ICategoriesRepository,
   ICreateCategoryDTO,
-} from './ICategoriesRepository';
+} from '../ICategoriesRepository';
 
-//singleton: criar uma isntancia global para nossa aplicação
 class CategoriesRepository implements ICategoriesRepository {
   private categories: Category[];
 
@@ -18,7 +17,7 @@ class CategoriesRepository implements ICategoriesRepository {
     if (!CategoriesRepository.INSTANCE) {
       CategoriesRepository.INSTANCE = new CategoriesRepository();
     }
-    
+
     return CategoriesRepository.INSTANCE;
   }
 
