@@ -18,8 +18,10 @@
   },
   "dependencies": {
     "-": "^0.0.1",
+    "@types/multer": "^1.4.7",
     "@types/uuid": "^8.3.1",
     "eslint-import-resolver-typescript": "^2.5.0",
+    "multer": "^1.4.3",
     "uuid": "^8.3.2"
   },
   "name": "CriandoApiComNodeJS",
