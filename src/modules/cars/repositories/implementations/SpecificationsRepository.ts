@@ -9,7 +9,7 @@ class SpecificationsRepository implements ISpecificationRepository {
   private repository: Repository<Specification>;
   private static INSTANCE: SpecificationsRepository;
 
-  private constructor() {
+  constructor() {
     this.repository = getRepository(Specification);
   }
 
@@ -27,12 +27,12 @@ class SpecificationsRepository implements ISpecificationRepository {
     return specification;
   }
 
-  public static getInstance(): SpecificationsRepository {
-    if (!SpecificationsRepository.INSTANCE) {
-      SpecificationsRepository.INSTANCE = new SpecificationsRepository();
-    }
-    return SpecificationsRepository.INSTANCE;
-  }
+//   public static getInstance(): SpecificationsRepository {
+//     if (!SpecificationsRepository.INSTANCE) {
+//       SpecificationsRepository.INSTANCE = new SpecificationsRepository();
+//     }
+//     return SpecificationsRepository.INSTANCE;
+//   }
 }
 
 export { SpecificationsRepository };
