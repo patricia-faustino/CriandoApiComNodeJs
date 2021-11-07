@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
 import { verify } from 'jsonwebtoken';
+import { AppError } from '../errors/AppError';
 import { UserRepository } from '../modules/accounts/repositories/implementations/UserRepository';
 
 interface IPlayload {
@@ -18,7 +19,7 @@ export async function ensuareAuthenticated(
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
-    throw new Error('Token missing');
+    throw new AppError('Token missing', 401);
   }
 
   // Bearer tokenSendoPassado
@@ -36,12 +37,12 @@ export async function ensuareAuthenticated(
     const userAlreadyExist = userRepository.findById(user_id);
 
     if (!userAlreadyExist) {
-      throw new Error('Users does not exists!');
+      throw new AppError('Users does not exists!', 401);
     }
 
     next();
-    
+
   } catch {
-    throw new Error('Invalid token!');
+    throw new AppError('Invalid token!', 401);
   }
 }

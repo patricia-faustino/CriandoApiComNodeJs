@@ -5,6 +5,7 @@ import { inject, injectable } from 'tsyringe';
 import { sign } from 'jsonwebtoken';
 
 import { IUserRepository } from '../../repositories/IUsersRepository';
+import { AppError } from '../../../../errors/AppError';
 
 interface IRequest {
   email: string;
@@ -31,16 +32,17 @@ class AuthenticateUserUseCase {
     const user = await this.userRepository.findByEmail(email);
 
     if (!user) {
-      throw new Error('Email or password incorrect!');
+      throw new AppError('Email or password incorrect!');
     }
 
     const passwordMatch = await compare(password, user.password);
 
     // senha está correta
-    if (!password) {
-      throw new Error('Email or password incorrect!');
+    if (!passwordMatch) {
+      throw new AppError('Email or password incorrect!');
     }
 
+    //gerar jsonwebtoken
     const token = sign({}, 'cbbc7b0d8ace662f3cdc870e2db0ba2f', {
       subject: user.id,
       expiresIn: '1d',
@@ -55,8 +57,6 @@ class AuthenticateUserUseCase {
     };
 
     return tokenReturn;
-
-    //gerar jsonwebtoken
   }
 }
 
