@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe';
+import { AppError } from '../../../../errors/AppError';
 import { ISpecificationRepository } from '../../repositories/ISpecificationRepository';
 
 interface IRequest {
@@ -5,18 +7,21 @@ interface IRequest {
   description: string;
 }
 
+@injectable()
 class CreateSpecificationUseCase {
-  constructor(private specificationRepository: ISpecificationRepository) {}
+  constructor(
+    @inject('SpecificationsRepository')
+    private specificationRepository: ISpecificationRepository,
+  ) {}
 
-  execute({ name, description }: IRequest): void {
-    const specificationAlreadExists =
-      this.specificationRepository.findByName(name);
+  async execute({ name, description }: IRequest): Promise<void> {
+    const specificationAlreadExists = await this.specificationRepository.findByName(name);
 
     if (specificationAlreadExists) {
-      throw new Error('Specification alread exists!');
+      throw new AppError('Specification alread exists!');
     }
 
-    this.specificationRepository.create({
+    await this.specificationRepository.create({
       name,
       description,
     });
