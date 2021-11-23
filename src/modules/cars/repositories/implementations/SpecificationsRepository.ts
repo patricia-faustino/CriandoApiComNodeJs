@@ -7,7 +7,6 @@ import {
 
 class SpecificationsRepository implements ISpecificationRepository {
   private repository: Repository<Specification>;
-  private static INSTANCE: SpecificationsRepository;
 
   constructor() {
     this.repository = getRepository(Specification);

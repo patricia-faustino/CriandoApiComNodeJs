@@ -8,7 +8,7 @@ interface IPlayload {
   sub: string;
 }
 
-export async function ensuareAuthenticated(
+export async function ensureAuthenticated(
   request: Request,
   response: Response,
   next: NextFunction,
