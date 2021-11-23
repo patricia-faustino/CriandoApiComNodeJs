@@ -1,3 +1,7 @@
+import 'reflect-metadata';
+
+import { inject, injectable } from 'tsyringe';
+
 import express, { NextFunction, Request, Response } from 'express';
 
 import "express-async-errors";
@@ -5,8 +9,6 @@ import "express-async-errors";
 import './database';
 
 import './shared/container';
-
-import 'reflect-metadata';
 
 import swaggerUi from 'swagger-ui-express';
 
