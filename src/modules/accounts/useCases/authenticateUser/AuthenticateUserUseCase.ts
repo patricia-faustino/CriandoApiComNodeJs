@@ -4,8 +4,8 @@ import { inject, injectable } from 'tsyringe';
 
 import { sign } from 'jsonwebtoken';
 
-import { IUserRepository } from '../../repositories/IUsersRepository';
-import { AppError } from '../../../../errors/AppError';
+import { IUserRepository } from '@modules/accounts/repositories/IUsersRepository';
+import { AppError } from '@shared/errors/AppError';
 
 interface IRequest {
   email: string;
@@ -37,7 +37,7 @@ class AuthenticateUserUseCase {
 
     const passwordMatch = await compare(password, user.password);
 
-    // senha está correta
+    // senha está incorreta
     if (!passwordMatch) {
       throw new AppError('Email or password incorrect!');
     }

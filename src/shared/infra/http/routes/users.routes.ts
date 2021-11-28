@@ -1,10 +1,10 @@
+import { CreateUserController } from '@modules/accounts/useCases/createUser/CreateUserController';
+import { UpdateUserAvatarController } from '@modules/accounts/useCases/updateUserAvatar/UpdateUserAvatarController';
 import { Router } from 'express';
+import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensureAuthenticated';
 import multer from 'multer';
-import { CreateUserController } from '../modules/accounts/useCases/createUser/CreateUserController';
-import { UpdateUserAvatarController } from '../modules/accounts/useCases/updateUserAvatar/UpdateUserAvatarController';
 
-import uploadConfig from '../config/upload';
-import { ensuareAuthenticated } from '../middlewares/ensuareAuthenticated';
+import uploadConfig from '@config/upload';
 
 const usersRouter = Router();
 
@@ -18,7 +18,7 @@ usersRouter.post('/', createUserController.handle);
 
 usersRouter.patch(
   '/avatar',
-  ensuareAuthenticated,
+  ensureAuthenticated,
   uploadAvatar.single('avatar'),
   updateUserAvatarController.handle,
 );

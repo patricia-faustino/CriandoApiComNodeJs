@@ -1,14 +1,14 @@
+import { AppError } from '@shared/errors/AppError';
+import { UserRepository } from '@modules/accounts/infra/repositories/UserRepository';
 import { NextFunction, Request, Response } from 'express';
 
 import { verify } from 'jsonwebtoken';
-import { AppError } from '../errors/AppError';
-import { UserRepository } from '../modules/accounts/repositories/implementations/UserRepository';
 
 interface IPlayload {
   sub: string;
 }
 
-export async function ensuareAuthenticated(
+export async function ensureAuthenticated(
   request: Request,
   response: Response,
   next: NextFunction,
