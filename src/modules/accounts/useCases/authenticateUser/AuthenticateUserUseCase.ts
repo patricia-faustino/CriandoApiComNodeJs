@@ -4,8 +4,8 @@ import { inject, injectable } from 'tsyringe';
 
 import { sign } from 'jsonwebtoken';
 
-import { IUserRepository } from '@modules/accounts/repositories/IUsersRepository';
 import { AppError } from '@shared/errors/AppError';
+import { IUserRepository } from '@modules/accounts/repositories/IUsersRepository';
 
 interface IRequest {
   email: string;
